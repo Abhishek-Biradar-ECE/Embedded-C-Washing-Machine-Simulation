@@ -1,1 +1,1 @@
-# Embedded-C-Washing-Machine-Simulation
+# embedded-c-washing-machine-simulation
