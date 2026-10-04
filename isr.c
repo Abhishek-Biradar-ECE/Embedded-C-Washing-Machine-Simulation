@@ -1,0 +1,30 @@
+#include <xc.h>
+
+//min=1, sec=58.. 0
+extern unsigned char sec, min;
+void __interrupt() isr( void ) //interrupt handler
+
+{
+    static unsigned long int count = 0;
+    
+    if(TMR2IF == 1)
+    {
+        if(++count == 20000) 
+        {
+            if(sec != 0)
+               sec--;
+            else if ( sec == 0 && min != 0)
+            {
+                min--;
+                sec=60;
+            }
+            count = 0;
+       
+        }
+        
+        TMR2IF = 0; // 
+        
+    }  
+    
+}
+
