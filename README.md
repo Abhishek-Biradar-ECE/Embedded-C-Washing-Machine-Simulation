@@ -150,8 +150,12 @@ Embedded-C-Washing-Machine-Simulation/
 ├── washing_machine_header.h
 ├── Makefile
 │
-└── images/
-    └── washing_machine_simulation.png
+└── images
+    ├── Different_Option_to_Wash_Clothes.png
+    ├── Machine_Starts.png
+    ├── Powering_On_Washing_Machine.png
+    ├── Water_Level.png
+    └── washing_machine_intial_screen.png
 ```
 
 ## Author
