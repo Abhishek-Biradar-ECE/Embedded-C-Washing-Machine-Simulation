@@ -2,7 +2,7 @@
 
 An Embedded C-based automatic washing machine simulation developed using the **PIC16F877A microcontroller** and tested in **PICSimLab using the PICGenios board**. The project demonstrates modular firmware development, keypad interfacing, LCD control, timer-based operation, interrupt handling, and peripheral control.
 
-![Washing Machine Simulation](images/washing_machine_simulation.png)
+![Washing Machine Simulation](images/washing_machine_intial _screen.png)
 
 ## Overview
 
