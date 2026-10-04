@@ -1,102 +1,163 @@
-# embedded-c-washing-machine-simulation
+# Embedded C Washing Machine Simulation
+
+An Embedded C-based automatic washing machine simulation developed using the **PIC16F877A microcontroller** and tested in **PICSimLab using the PICGenios board**. The project demonstrates modular firmware development, keypad interfacing, LCD control, timer-based operation, interrupt handling, and peripheral control.
+
+![Washing Machine Simulation](images/washing_machine_simulation.png)
 
 ## Overview
 
-The Embedded C Washing Machine Simulation is a microcontroller-based project developed to simulate the basic operations of an automatic washing machine.
+This project simulates the operation of an automatic washing machine using **Embedded C**.
 
-The project demonstrates embedded programming concepts such as GPIO control, keypad interfacing, timers, interrupts, and state-based control. The washing cycle is controlled through programmed inputs and operates through different stages of the washing process.
+The user interacts with the system through a **4x3 keypad**, while a **16x4 HD44780 LCD** provides prompts and status information. The PIC16F877A processes user inputs and controls the washing-machine operations using programmed control logic, timers, interrupts, and peripheral outputs.
+
+The firmware is organized into multiple modules for hardware drivers, timer configuration, interrupt handling, and washing-machine control logic.
 
 ## Features
 
-* Washing machine operation simulation
 * Keypad-based user input
-* LED/status indication
-* Timer-based operation
-* Interrupt handling
-* Multiple washing cycle stages
-* Microcontroller-based control logic
+* Power-on control using **Key5**
+* 16x4 LCD status and user prompts
+* Timer2-based timing
+* Timer interrupt handling
+* Buzzer control
+* Fan control
+* LED status indication
+* Modular Embedded C firmware
+* State-based control logic
 
 ## Technologies Used
 
 * **Programming Language:** Embedded C
 * **Microcontroller:** PIC16F877A
-* **Development Environment:** MPLAB X IDE
+* **Clock Frequency:** 20 MHz
+* **IDE:** MPLAB X IDE
 * **Simulation:** PICSimLab
+* **Simulation Board:** PICGenios
 
 ## Hardware / Peripherals
 
 * PIC16F877A Microcontroller
-* Keypad
+* 16x4 HD44780 Character LCD
+* 4x3 Digital Keypad
+* Buzzer
+* Fan
 * LEDs
-* Timer
-* Switches / Input controls
-* LCD or display interface *(if used in the project)*
 
-## Working
+## How It Works
 
-The user selects the required washing operation through the input interface. The microcontroller processes the input and controls the washing sequence according to the programmed logic.
+When the simulation starts, the LCD displays:
 
-The simulation represents different stages of a washing machine cycle, with timers and control logic used to manage each operation.
+> **Press Key5 TO Power ON Washing Machine**
 
-### Basic Workflow
+The user presses **Key5** on the keypad to power on the washing machine.
+
+After power-on, the keypad is used to interact with the washing-machine control system. The PIC16F877A processes the user input and controls the programmed operations.
+
+**Timer2 and interrupts** are used for time-based control, while the LCD and LEDs provide status information. The buzzer and fan are controlled by the microcontroller according to the programmed logic.
+
+### System Flow
 
 ```text
-User Input
-    ↓
-Keypad / Switch
-    ↓
-PIC16F877A
-    ↓
-Control Logic
-    ↓
-Washing Cycle
-    ↓
-Timer / Interrupt
-    ↓
-Status Indication
+        4x3 Keypad
+             |
+             v
+      +--------------+
+      |  PIC16F877A  |
+      | Control Logic|
+      +--------------+
+        |    |    |
+        |    |    +------> Buzzer
+        |    |
+        |    +-----------> Fan
+        |
+        +---------------> LCD
+        |
+        +---------------> LEDs
+             
+       Timer2 + ISR
+             |
+             v
+      Time-based Control
 ```
 
-## Embedded Concepts Demonstrated
+## Firmware Modules
+
+The project is divided into multiple modules for better code organization and maintainability.
+
+| File                             | Description                                  |
+| -------------------------------- | -------------------------------------------- |
+| `main.c`                         | Main program and system initialization       |
+| `main.h`                         | Main program definitions and declarations    |
+| `clcd.c`                         | 16x4 LCD driver implementation               |
+| `clcd.h`                         | LCD driver declarations                      |
+| `digital_keypad.c`               | Keypad scanning and input handling           |
+| `digital_keypad.h`               | Keypad definitions and declarations          |
+| `timers.c`                       | Timer2 configuration                         |
+| `timers.h`                       | Timer-related declarations                   |
+| `isr.c`                          | Interrupt Service Routine                    |
+| `washing_machine_function_def.c` | Washing machine control and operation logic  |
+| `washing_machine_header.h`       | Washing machine declarations and definitions |
+| `Makefile`                       | Project build configuration                  |
+
+## Embedded Systems Concepts Demonstrated
 
 * Embedded C programming
-* GPIO configuration and control
+* PIC16F877A microcontroller programming
+* GPIO configuration
 * Digital input/output
-* Timer programming
-* Interrupt handling
 * Keypad interfacing
-* Microcontroller peripherals
+* Character LCD interfacing
+* Timer configuration
+* Timer2 interrupt-based timing
+* Interrupt Service Routine (ISR)
+* Peripheral control
+* Modular firmware architecture
 * State-based control logic
-* Hardware simulation and debugging
 
-## Project Files
+## Simulation Environment
+
+The project was developed using **MPLAB X IDE** and simulated using **PICSimLab with the PICGenios board**.
+
+The PIC16F877A is configured to operate at **20 MHz**.
+
+## How to Run
+
+1. Open the project in **MPLAB X IDE**.
+2. Build the project to generate the `.hex` file.
+3. Open **PICSimLab**.
+4. Select the **PICGenios board** with the PIC16F877A.
+5. Load the generated `.hex` file into the simulation.
+6. Start the simulation.
+7. Press **Key5** to power on the washing machine.
+8. Use the keypad to interact with the system.
+
+## Project Structure
 
 ```text
 Embedded-C-Washing-Machine-Simulation/
 │
 ├── README.md
-├── source/
-│   └── washing_machine.c
-│
-├── simulation/
-│   └── simulation_files
+├── main.c
+├── main.h
+├── clcd.c
+├── clcd.h
+├── digital_keypad.c
+├── digital_keypad.h
+├── timers.c
+├── timers.h
+├── isr.c
+├── washing_machine_function_def.c
+├── washing_machine_header.h
+├── Makefile
 │
 └── images/
     └── washing_machine_simulation.png
 ```
 
-*Update the file names/folders according to the actual files in your project.*
-
-## Simulation
-
-The project was developed and tested in **PICSimLab** using the **PIC16F877A** microcontroller.
-
-## Learning Outcome
-
-This project provided practical experience in developing embedded firmware, interfacing microcontroller peripherals, handling timers and interrupts, and implementing control logic for a real-world embedded application.
-
 ## Author
 
 **Abhishek Biradar**
 
-Electronics & Communication Engineering
-Embedded Systems | Firmware | Robotics | IoT
+B.E. Electronics & Communication Engineering
+
+**Embedded Systems | Firmware Development | Robotics | IoT**
